@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokédex v0.2</title>
+    <link rel="shortcut icon" href="./img/pokeball.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <script defer src="./src/helper.js"></script>
+    <script defer src="./src/defaults.js"></script>
+    <script defer src="./src/templates.js"></script>
+    <script defer src="./src/script.js"></script>
+  </head>
+  <body class="flex-col" onload="init()">
+    <header class="widthLimit flex-center">
+      <a href="./index.html" class="flex-center">
+        <img src="./img/pokeball.png" alt="" />
+        <h1>Pokédex</h1>
+      </a>
+    </header>
+    <img src="./img/pokeball-big.png" alt="" class="backgroundImage" />
+    <div class="outer-container widthLimit flex-col">
+      <div class="selection-container flex-space widthLimit">
+        <form action="" onsubmit="event.preventDefault()" class="flex-center">
+          <div>
+            <label for="input-start-index">Dexnr.</label>
+            <input
+              type="number"
+              name=""
+              min="1"
+              max="1025"
+              id="input-start-index"
+              required
+              placeholder="1-1025"
+            />
+          </div>
+          <div>
+            <label for="input-show-count">Showing</label>
+            <input
+              type="number"
+              min="1"
+              max="36"
+              name=""
+              value="12"
+              id="input-show-count"
+              required
+            />
+          </div>
+          <button onclick="searchByPokemonId()" class="button">Show selection</button>
+        </form>
+        <div class="flex-space">
+          <form onsubmit="event.preventDefault()" class="flex-center">
+            <div>
+              <div class="search-input-container flex-space">
+                <input type="text" placeholder="Pokemon" id="input-name" />
+                <button class="clear-btn" onclick="clearInput()" title="clear text input">
+                  X
+                </button>
+              </div>
+              <button class="button" onclick="searchPokemonName()">Search</button>
+            </div>
+          </form>
+          <span
+            href=""
+            class="button lang-btn"
+            title="switch language"
+            onclick="switchLanguage()"
+            >DE</span
+          >
+        </div>
+      </div>
+
+      <div id="pokemon-card-container" class="widthLimit flex-space card-container"></div>
+      <div class="loading-box rotate d-none" id="loadingBox">
+        <div class="loading-dot"></div>
+        <div class="loading-dot"></div>
+        <div class="loading-dot"></div>
+        <div class="loading-dot"></div>
+      </div>
+      <button onclick="showMorePokemon()" class="button d-none" id="show-more-btn">
+        Show more
+      </button>
+      <div
+        class="popup-outer-container flex-col d-none"
+        id="popupBigCard"
+        onclick="togglePopup()"
+      >
+        <div class="popup-inner-container flex-col">
+          <div id="bigCard" class="big-card-container"></div>
+          <div
+            class="arrow-container flex-space widthLimit"
+            onclick="event.stopPropagation()"
+          >
+            <img
+              src="./img/arrowLeft-smooth.png"
+              class="arrow-icon"
+              onclick="showPreviousPokemon()"
+              alt="arrow to left"
+              title="go left"
+            />
+
+            <img
+              src="./img/arrowRight-smooth.png"
+              class="arrow-icon"
+              onclick="showNextPokemon()"
+              alt="arrow to right"
+              title="go right"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="widthLimit flex-center">©Robin Siebers 2024</footer>
+  </body>
+</html>
